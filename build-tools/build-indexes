@@ -337,14 +337,14 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const genNum = typeof(genIdent) == "number" ? Math.floor(isDoubles ? -genIdent : genIdent) : genIdent;
 		const gen = (() => {
     let genStr;
-    if (typeof(genNum) == "number") {
+    if (typeof(genIdent) == "number") {
         let genStr = 'gen' + genNum;
         if (isDLC1) genStr += 'dlc1';
         if (isLetsGo) genStr += 'letsgo';
         if (isBDSP) genStr += 'bdsp';
         if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
     } else {
-        let genStr = genNum
+        let genStr = genIdent
     }
     return genStr;
 })();
