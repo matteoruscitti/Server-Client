@@ -334,7 +334,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const isStadium = ('' + genIdent).endsWith('.04');
 		const isDoubles = (genIdent < 0);
 		const isVGC = ('' + genIdent).endsWith('.5');
-		const genIdent = typeof(genNum) == "number" ? Math.floor(isDoubles ? -genIdent : genIdent) : genIdent;
+		const genNum = typeof(genIdent) == "number" ? Math.floor(isDoubles ? -genIdent : genIdent) : genIdent;
 		const gen = (() => {
     let genStr;
     if (typeof(genNum) == "number") {
