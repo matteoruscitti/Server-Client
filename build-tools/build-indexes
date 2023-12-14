@@ -316,7 +316,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 
 	let buf = '// DO NOT EDIT - automatically built with build-tools/build-indexes\n\n';
 	const GENS = [9, 8, 7, 6, 5, 4, 3, 2, 1];
-	const MODS = ["omnifield", "gen9sanctified", "gen9universal"]
+	const MODS = ["ssb"];
 	const DOUBLES = GENS.filter(x => x > 2).map(num => -num);
 	const VGC = GENS.filter(x => x > 3).map(num => -num - 0.5);
 	const NFE = GENS.map(num => num + 0.3);
