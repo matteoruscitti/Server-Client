@@ -330,11 +330,11 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const isMetBattle = ('' + genIdent).endsWith('.2');
 		const isNFE = ('' + genIdent).endsWith('.3');
 		const isDLC1 = (genIdent === 8.4 || genIdent === -8.4);
-		const isNatDex = typeof(genNum) == "number" || (('' + genIdent).endsWith('.1') && genIdent > 8);
+		const isNatDex = typeof(genIdent) == "number" || (('' + genIdent).endsWith('.1') && genIdent > 8);
 		const isStadium = ('' + genIdent).endsWith('.04');
 		const isDoubles = (genIdent < 0);
 		const isVGC = ('' + genIdent).endsWith('.5');
-		const genNum = typeof(genNum) == "number" ? Math.floor(isDoubles ? -genIdent : genIdent) : genIdent;
+		const genIdent = typeof(genNum) == "number" ? Math.floor(isDoubles ? -genIdent : genIdent) : genIdent;
 		const gen = (() => {
     let genStr;
     if (typeof(genNum) == "number") {
