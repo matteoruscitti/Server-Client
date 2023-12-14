@@ -315,7 +315,7 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 	const BattleTeambuilderTable = {};
 
 	let buf = '// DO NOT EDIT - automatically built with build-tools/build-indexes\n\n';
-	const GENS = [9, 8, 7, 6, 5, 4, 3, 2, 1];
+	const GENS = [9, 8, 7, 6, 5, 4, 3, 2, 1, "omnifield", "gen9sanctified", "gen9universal"];
 	const DOUBLES = GENS.filter(x => x > 2).map(num => -num);
 	const VGC = GENS.filter(x => x > 3).map(num => -num - 0.5);
 	const NFE = GENS.map(num => num + 0.3);
@@ -330,19 +330,24 @@ process.stdout.write("Building `data/teambuilder-tables.js`... ");
 		const isMetBattle = ('' + genIdent).endsWith('.2');
 		const isNFE = ('' + genIdent).endsWith('.3');
 		const isDLC1 = (genIdent === 8.4 || genIdent === -8.4);
-		const isNatDex = ('' + genIdent).endsWith('.1') && genIdent > 8;
+		const isNatDex = typeof(genNum) == "number" || (('' + genIdent).endsWith('.1') && genIdent > 8);
 		const isStadium = ('' + genIdent).endsWith('.04');
 		const isDoubles = (genIdent < 0);
 		const isVGC = ('' + genIdent).endsWith('.5');
-		const genNum = Math.floor(isDoubles ? -genIdent : genIdent);
+		const genNum = typeof(genNum) == "number" ? Math.floor(isDoubles ? -genIdent : genIdent) : genIdent;
 		const gen = (() => {
-			let genStr = 'gen' + genNum;
-			if (isDLC1) genStr += 'dlc1';
-			if (isLetsGo) genStr += 'letsgo';
-			if (isBDSP) genStr += 'bdsp';
-			if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
-			return genStr;
-		})();
+    let genStr;
+    if (typeof(genNum) == "number") {
+        let genStr = 'gen' + genNum;
+        if (isDLC1) genStr += 'dlc1';
+        if (isLetsGo) genStr += 'letsgo';
+        if (isBDSP) genStr += 'bdsp';
+        if (isStadium) genStr += 'stadium' + (genNum > 1 ? genNum : '');
+    } else {
+        let genStr = genNum
+    }
+    return genStr;
+})();
 		// process.stdout.write("" + gen + (isDoubles ? " doubles" : "") + "... ");
 		const pokemon = Object.keys(Dex.data.Pokedex);
 		pokemon.sort();
